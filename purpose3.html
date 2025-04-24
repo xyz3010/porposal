@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Will You Be Mine?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffe6f0;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #ff3399;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .yes-btn {
+      background-color: #66cc66;
+      color: white;
+    }
+    .no-btn {
+      background-color: #ff6666;
+      color: white;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="setupCard">
+  <h1>Enter Your Details 💖</h1>
+  <input type="text" id="yourName" placeholder="Your name"><br>
+  <input type="text" id="crushName" placeholder="Crush's name"><br>
+  <button onclick="startProposal()">Start</button>
+</div>
+
+<div class="card" id="proposalCard" style="display: none;">
+  <h1 id="question">Will you be mine forever? 💖</h1>
+  <button class="yes-btn" onclick="sayYes()">Yes</button>
+  <button class="no-btn" onclick="askAgain()">No</button>
+</div>
+
+<script>
+  let yourName = "";
+  let crushName = "";
+  const messages = [
+    "Are you sure? 😢",
+    "Please say yes 🥺",
+    "I can wait forever 💘",
+    "Don't say no again 😔",
+    "You're my everything 😍",
+    "Okay, one more time...",
+    "I'll keep asking 💌",
+    "Can't give up on you 💞"
+  ];
+  let count = 0;
+
+  function startProposal() {
+    yourName = document.getElementById("yourName").value.trim();
+    crushName = document.getElementById("crushName").value.trim();
+
+    if (!yourName || !crushName) {
+      alert("Please fill in both names!");
+      return;
+    }
+
+    document.getElementById("setupCard").style.display = "none";
+    document.getElementById("proposalCard").style.display = "inline-block";
+
+    document.getElementById("question").innerText = `Hey ${crushName}, will you be mine forever? 💖`;
+  }
+
+  function askAgain() {
+    const question = document.getElementById("question");
+    question.innerText = `${yourName}: ${messages[count % messages.length]} ${crushName}, will you be mine? 💖`;
+    count++;
+  }
+
+  function sayYes() {
+    const card = document.getElementById("proposalCard");
+    card.innerHTML = `<h1>Yay! 💍 ${crushName} said YES to ${yourName}! 💖💖</h1>`;
+  }
+</script>
+
+</body>
+</html>
